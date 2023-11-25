@@ -25,7 +25,7 @@ class SubjectRepo(metaclass=SingletonMeta):
 
     def delete_subject(self, name):
         try:
-            index = next(i for i, v in enumerate(self.subjects) if v.name == name)
+            index = next(i for i, subject in enumerate(self.subjects) if subject.name == name)
         except StopIteration:
             return False
         self.subjects.pop(index)
