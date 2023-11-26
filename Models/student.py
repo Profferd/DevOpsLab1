@@ -6,11 +6,8 @@ class Student:
 
     def gpa(self):
         if len(self.scores) == 0:
-            return 0.0
+            return 0
         return sum([score.score for score in self.scores]) / len(self.scores)
-    
-    def get_scores(self):
-        return self.scores
     
     def subjects(self):
         return [score.subject for score in self.scores]
@@ -20,10 +17,4 @@ class Student:
     
     def get_last_name(self):
         return self.last_name
-    
-    def passed_subjects(self):
-        return [score.subject for score in self.scores if score.score >= score.subject.get_passing_score()]
-    
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}, GPA: {self.gpa()}.'
     
