@@ -1,12 +1,12 @@
-from SingletonMeta import SingletonMeta
-from subject import Subject
+from .SingletonMeta import SingletonMeta
+from .subject import Subject
 
 class SubjectRepo(metaclass=SingletonMeta):
-    subjects = []
+    subjects: list[Subject] = []
 
     def create_subject(self, name, passing_score):
-        filtered_elements = list(filter(lambda subject: subject.name == name, self.subjects))
-        if filtered_elements:
+        index = self.find_subject(name)
+        if index != -1:
             return False
         subject = Subject(name, passing_score)
         self.subjects.append(subject)
@@ -15,18 +15,22 @@ class SubjectRepo(metaclass=SingletonMeta):
     def get_subjects(self):
         return self.subjects
     
-    def update_subject(self, name, passing_score):
+    def find_subject(self, name):
         try:
-            index = next(i for i, v in enumerate(self.subjects) if v.name == name)
+            return next(i for i, v in enumerate(self.subjects) if v.name == name)
         except StopIteration:
+            return -1
+    
+    def update_subject(self, name, passing_score):
+        index = self.find_subject(name)
+        if index == -1:
             return False
         self.subjects[index].passing_score = passing_score
         return True
 
     def delete_subject(self, name):
-        try:
-            index = next(i for i, subject in enumerate(self.subjects) if subject.name == name)
-        except StopIteration:
+        index = self.find_subject(name)
+        if index == -1:
             return False
         self.subjects.pop(index)
         return True
