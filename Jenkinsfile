@@ -9,7 +9,7 @@ pipeline {
     stage('main') {
       steps {
         git branch: 'main', url: 'https://github.com/Profferd/DevOpsLab1.git'
-        bat 'python3 main.py'
+        bat 'python main.py'
       }
     }
   }
