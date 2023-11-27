@@ -124,11 +124,10 @@ def execute(command):
 
 
 if __name__ == '__main__':
-    while True:
-        show_menu()
-        try:
-            execute(input('Enter command: '))
-        except Exception as e:
-            print(e)
+    show_menu()
+    try:
+        execute(input('Enter command: '))
+    except Exception as e:
+        print(e)
 
         
