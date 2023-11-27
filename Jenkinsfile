@@ -3,12 +3,13 @@ pipeline {
   stages {
     stage('version') {
       steps {
-        sh 'python3 --version'
+        bat 'python --version'
       }
     }
-    stage('main') {
+    stage('Test') {
       steps {
-        sh 'python3 main.py'
+        git branch: 'main', url: 'https://github.com/Profferd/DevOpsLab1.git'
+        bat 'python testMain.py'
       }
     }
   }
